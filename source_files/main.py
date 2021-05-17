@@ -1,5 +1,5 @@
 from feature_extraction import *
-from DL_model import *
+from dl_model import *
 
 
 def main():
