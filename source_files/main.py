@@ -1,15 +1,15 @@
 from feature_extraction import *
-from dl_model import *
+from mfcc_dl_model import *
 
 
 def main():
-    test_file = "audio_files/Throes of Perdition.flac"
+    dataset_path = "audio_files"
     hop_length = 512
     frame_size = 2048
 
-    mel_spectrogram_extraction(test_file, hop_length, frame_size)
+    data_insert(dataset_path, hop_length, frame_size)
 
-    mfcc_extraction(test_file)
+    data_preparation()
 
 
 if __name__ == '__main__':

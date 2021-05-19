@@ -3,7 +3,15 @@ from sklearn.model_selection import train_test_split
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import mysql.connector
 
+
+database = mysql.connector.connect(
+    host='localhost',
+    user='metallibrary',
+    passwd='password',
+    database='metal_features'
+)
 
 device = torch.device('cpu')
 
@@ -23,7 +31,7 @@ class MfccConvNet(nn.Module):
         self.fc1 = nn.Linear(32*8*8, 120)
         self.fc2 = nn.Linear(120, 80)
         self.fc3 = nn.Linear(80, 50)
-        self.fc4 = nn.Linear(50, 5)
+        self.fc4 = nn.Linear(50, 7)
 
     def forward(self, u):
         u = self.pool1(F.leaky_relu(self.conv1(u)))
@@ -43,5 +51,9 @@ class MfccConvNet(nn.Module):
 
 model = MfccConvNet().to(device)
 
-def data_preparation(test_size, validation_size):
-    # transform data stores as np.array into tensor
+def data_preparation():
+    # transform data stored as np.array into tensor
+    mfcc_cursor = database.cursor()
+
+
+
